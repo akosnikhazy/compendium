@@ -9,7 +9,7 @@ export default function CompendiumCamera({navigation}: {navigation: any}) {
   const [permission, requestPermission] = useCameraPermissions();
   const cameraRef = useRef(null);
   const { height, width } = Dimensions.get('window');
-
+  const [message, setMessage] = useState('');
   const squareSize = height;
 
   if (!permission) {
@@ -33,12 +33,12 @@ export default function CompendiumCamera({navigation}: {navigation: any}) {
 */
   const takePicture = async () => {
     if (cameraRef.current) {
-        let photo = await cameraRef.current.takePictureAsync();
+        let photo = await cameraRef.current.takePictureAsync({base64:true});
         // save photo to gallery
         MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
             setPhoto(undefined);
         });
-        navigation.navigate("SaveItem")
+        navigation.navigate("SaveItem",{photo});
             // jump to editor
     }
   };
