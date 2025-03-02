@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Button, StyleSheet, Text, View, Image, Dimensions,TextInput} from 'react-native';
+import { Button, StyleSheet, Text, View, Image, Dimensions,TextInput, TouchableOpacity} from 'react-native';
 import { useRoute } from '@react-navigation/native';
+
 
 import { FlipType, SaveFormat, useImageManipulator } from 'expo-image-manipulator';
 
@@ -61,10 +62,23 @@ export default function SaveItem({navigation}: {navigation: any}) {
         height: squareSize}}>
     </View>
     <View style={styles.input}>
-    <Text style={styles.text}>What is on the picture?</Text>
-    <TextInput
+    
+    <TextInput style={styles.tinput}
           placeholder='Type what is this?'  
         />
+        <View style={styles.br} />
+      <TouchableOpacity style={styles.button} onPress={()=>false}>
+          <Text>🌿</Text>
+        </TouchableOpacity>
+        <View style={styles.br} />
+        <TouchableOpacity style={styles.button} onPress={()=>false}>
+          <Text>🐴</Text>
+        </TouchableOpacity>
+        <View style={styles.br} />
+        <TouchableOpacity style={styles.button} onPress={()=>false}>
+          <Text>🧰</Text>
+        </TouchableOpacity>
+        <View style={styles.br} />
        <Button title="Save Item" 
                 onPress={() => navigation.navigate("Camera")} 
     />
@@ -109,5 +123,8 @@ const styles = StyleSheet.create({
 
   },
   text:{color:"#fefefe"},
-  placeholder:{flex:10}
+  tinput:{borderWidth: 10},
+  placeholder:{flex:10},
+  button:{width:100,paddingLeft:10},
+  br:{padding:5}
 });
