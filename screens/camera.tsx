@@ -9,8 +9,9 @@ export default function CompendiumCamera({navigation}: {navigation: any}) {
   const [permission, requestPermission] = useCameraPermissions();
   const cameraRef = useRef(null);
   const { height, width } = Dimensions.get('window');
-  const [message, setMessage] = useState('');
   const squareSize = height;
+  const [message, setMessage] = useState('');
+  
 
   if (!permission) {
     // Camera permissions are still loading.
