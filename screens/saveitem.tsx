@@ -3,25 +3,31 @@ import { Button, StyleSheet, Text, View, Image, Dimensions,TextInput, TouchableO
 import { useRoute } from '@react-navigation/native';
 
 
-import { FlipType, SaveFormat, useImageManipulator } from 'expo-image-manipulator';
+import { SaveFormat, useImageManipulator } from 'expo-image-manipulator';
+
+var category  = 0;
+
 
 export default function SaveItem({navigation}: {navigation: any}) {
   
   const route = useRoute();
   const { height, width } = Dimensions.get('window');
-  const { photo } = route.params
+  const { photo }  = route.params ;
   const squareSize = height;
+
   if(route.params)
   {
     
 
+
     const [image, setImage] = useState(photo.uri);
     const context = useImageManipulator(photo.uri);
-   
+    const [name, setText] = useState('');
     const pheight = photo.height;
     const pwidth = photo.width;
     const cropImage = async () => {
-      
+    
+   
       context.crop({
         height: pheight, 
         originX: pwidth / 2 - pheight / 2, 
@@ -63,30 +69,30 @@ export default function SaveItem({navigation}: {navigation: any}) {
     </View>
     <View style={styles.input}>
     
-    <TextInput style={styles.tinput}
+    <TextInput style={styles.tinput} onChangeText = {newText => setText(newText)}
           placeholder='Type what is this?'  
         />
         <View style={styles.br} />
-      <TouchableOpacity style={styles.button} onPress={()=>false}>
+      <TouchableOpacity style={styles.button} onPress={()=>{category = 1}}>
           <Text>🌿</Text>
         </TouchableOpacity>
         <View style={styles.br} />
-        <TouchableOpacity style={styles.button} onPress={()=>false}>
+        <TouchableOpacity style={styles.button} onPress={()=>{category = 2}}>
           <Text>🐴</Text>
         </TouchableOpacity>
         <View style={styles.br} />
-        <TouchableOpacity style={styles.button} onPress={()=>false}>
+        <TouchableOpacity style={styles.button} onPress={()=>{category = 3}}>
           <Text>🧰</Text>
         </TouchableOpacity>
         <View style={styles.br} />
        <Button title="Save Item" 
-                onPress={() => navigation.navigate("Camera")} 
+                onPress={() => {alert(name)}} 
     />
     </View>
     <View style={styles.placeholder}></View>
     <View style={styles.backbtn}>
     <Button title="🔙" 
-                onPress={() => navigation.navigate("Camera")} 
+      onPress={() => navigation.navigate("Camera")} 
     /></View>
     </View>
       
